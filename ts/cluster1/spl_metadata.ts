@@ -16,7 +16,6 @@ import {
 } from "@metaplex-foundation/mpl-token-metadata";
 import { createSignerFromKeypair, signerIdentity, publicKey, none } from "@metaplex-foundation/umi";
 import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
-import { PublicKey } from "@solana/web3.js";
 
 // Define our Mint address
 const mint = publicKey("6YonGwmWLd3fVd1uxSgDQp3oauM8cdnMHuBfjTKoR2ry")

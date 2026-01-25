@@ -4,7 +4,7 @@ import fs from "fs";
 
 const wallet = JSON.parse(
     fs.readFileSync(
-        "",
+        "wallet_path",
         "utf8"
     )
 )
@@ -16,10 +16,10 @@ const commitment: Commitment = "confirmed";
 const connection = new Connection("https://api.devnet.solana.com", commitment);
 
 // Mint address
-const mint = new PublicKey("<mint address>");
+const mint = new PublicKey("3seuNRFgbkEwcAFLgbSuikaAUom1tr6EXY4MiK4MqyG3");
 
 // Recipient address
-const to = new PublicKey("<receiver address>");
+const to = new PublicKey("berg7BKPHZWPiAdjpitQaWCfTELaKjQ6x7e9nDSu23d");
 
 (async () => {
     try {
@@ -28,6 +28,30 @@ const to = new PublicKey("<receiver address>");
         // Get the token account of the toWallet address, and if it does not exist, create it
 
         // Transfer the new token to the "toTokenAccount" we just created
+        const fromWallet = await getOrCreateAssociatedTokenAccount(
+            connection,
+             keypair, 
+             mint,
+             keypair.publicKey
+         )
+
+        const toWallet = await getOrCreateAssociatedTokenAccount(
+            connection,
+            keypair,
+            mint,
+            to,
+         )
+
+        const toTokenAccount = await transfer(
+            connection,
+            keypair,
+            fromWallet.address,
+            toWallet.address,
+            keypair.publicKey,
+            100
+        ) 
+        console.log("to account", toTokenAccount);
+        
     } catch(e) {
         console.error(`Oops, something went wrong: ${e}`)
     }

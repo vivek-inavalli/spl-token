@@ -4,7 +4,7 @@ import fs from "fs";
 
 const wallet = JSON.parse(
     fs.readFileSync(
-        "",
+        "wallet_path",
         "utf8"
     )
 )
